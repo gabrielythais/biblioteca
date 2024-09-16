@@ -1,0 +1,19 @@
+# Arquivos de configuração de banco de dados
+*.sql
+
+# Configurações específicas de ambiente
+.env
+
+# Logs e backups de banco de dados
+*.log
+*.bak
+*.backup
+
+# Diretórios de dependências
+/node_modules
+/vendor
+
+# Arquivos de cache
+*.cache
+*.temp
+*.tmp
