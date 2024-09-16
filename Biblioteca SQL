@@ -1,0 +1,82 @@
+Este projeto é um sistema básico de gerenciamento de biblioteca utilizando MySQL. Ele inclui a criação de tabelas para Autores, Livros e Empréstimos, além de inserções de dados de exemplo e consultas para manipulação e visualização das informações do banco de dados.
+
+Estrutura do Projeto
+Criação do banco de dados e tabelas:
+
+Autores: Armazena informações sobre os autores.
+Livros: Armazena informações sobre os livros.
+Empréstimos: Registra os empréstimos de livros da biblioteca.
+Inserção de dados:
+
+Inserção de dados de autores, livros e empréstimos.
+Consultas:
+
+Consulta para listar todos os livros e seus respectivos autores.
+Consulta para listar todos os empréstimos que ainda estão em aberto.
+Atualizações e exclusões:
+
+Atualização da data de devolução de um empréstimo.
+Exclusão de um livro e de seus empréstimos associados.
+
+Instruções de Uso
+Clone o repositório:
+git clone https://github.com/gabrielythais/biblioteca-sql.git
+
+cesse o diretório do projeto:
+cd biblioteca-sql
+
+Importe o arquivo biblioteca.sql no seu servidor MySQL para criar as tabelas e inserir os dados:
+mysql -u gabrielythais -p < biblioteca.sql
+
+Execute as consultas ou faça modificações conforme necessário.
+
+Estrutura do Banco de Dados
+Tabela Autores:
+
+AutorID: Chave primária, identificador do autor.
+Nome: Nome do autor.
+Nacionalidade: Nacionalidade do autor.
+Tabela Livros:
+
+LivroID: Chave primária, identificador do livro.
+Titulo: Título do livro.
+AutorID: Chave estrangeira, referenciando o autor do livro.
+AnoPublicacao: Ano de publicação do livro.
+Genero: Gênero do livro.
+Tabela Emprestimos:
+
+EmprestimoID: Chave primária, identificador do empréstimo.
+LivroID: Chave estrangeira, referenciando o livro emprestado.
+DataEmprestimo: Data do empréstimo do livro.
+DataDevolucao: Data de devolução do livro.
+NomeUsuario: Nome do usuário que pegou o livro emprestado.
+
+Consultas SQL
+Listar livros com seus autores
+SELECT Livros.Titulo, Autores.Nome AS Autor, Livros.AnoPublicacao
+FROM Livros
+JOIN Autores ON Livros.AutorID = Autores.AutorID;
+
+Listar empréstimos em aberto
+SELECT Emprestimos.EmprestimoID, Livros.Titulo, Emprestimos.DataEmprestimo, Emprestimos.NomeUsuario
+FROM Emprestimos
+JOIN Livros ON Emprestimos.LivroID = Livros.LivroID
+WHERE Emprestimos.DataDevolucao IS NULL;
+
+Atualizar data de devolução de um empréstimo
+UPDATE Emprestimos
+SET DataDevolucao = '2024-08-22'
+WHERE EmprestimoID = 1;
+
+Excluir livro e seus empréstimos associados
+DELETE FROM Emprestimos WHERE LivroID = 1;
+DELETE FROM Livros WHERE LivroID = 1;
+
+Requisitos
+MySQL 5.7 ou superior
+
+Editor de SQL para execução das queries (MySQL Workbench, phpMyAdmin, etc.)
+Contribuições
+
+Sinta-se à vontade para enviar pull requests ou abrir issues para melhorias e correções de bugs.
+
